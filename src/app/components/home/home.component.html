@@ -134,7 +134,7 @@
         <div class="row justify-content-center">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let specialist of global.specialistsUnlimited"
+                <div class="swiper-slide" *ngFor="let specialist of global.specialistsUnlimited" [hidden]="specialist.status!='approved'"
                   >
                     <div class="card rounded-3 w-100 flex-fill overflow-hidden">
                         <div class="card-img-wrap card-image-hover overflow-hidden">
