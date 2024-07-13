@@ -13,3 +13,26 @@
 .arrow-left {
     margin-right: 0.5rem; /* Espacio entre la flecha y el texto */
 }
+
+.custom-toast {
+    background-color: #00a08f; /* Color de fondo personalizado */
+    color: white; /* Color del texto */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 16px; /* Espaciado interno */
+  }
+  /* Opcional: Estilos específicos para tipos de toastr */
+.custom-toast.success {
+    background-color: #00a08f; /* Verde para éxito */
+  }
+  
+  .custom-toast.error {
+    background-color: #dc3545; /* Rojo para error */
+  }
+  
+  .custom-toast.info {
+    background-color: #17a2b8; /* Azul para información */
+  }
+  
+  .custom-toast.warning {
+    background-color: #ffc107; /* Amarillo para advertencia */
+  }

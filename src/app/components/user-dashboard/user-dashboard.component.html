@@ -1,7 +1,7 @@
 
-<div class="map-wrapper" style="padding-top: 100px;" [hidden]="authRest.getType()=='admin'" >
+<div class="map-wrapper" [hidden]="authRest.getType()=='admin'" >
     <!-- start sidebar filters -->
-    <div class="sidebar-filters js-sidebar-filters-mobile">
+    <div class="sidebar-filters js-sidebar-filters-mobile" >
         <!-- filter header -->
         <div class="border-bottom d-flex justify-content-between align-items-center p-3 sidebar-filters-header d-xl-none">
             <div class="align-items-center btn-icon d-flex filter-close justify-content-center rounded-circle">
@@ -14,7 +14,7 @@
         </div>
         <!-- end /. filter header -->
         <div class="sidebar-filters-body p-3 p-xl-4">
-            <p><strong> Filtros de búsqueda avanzada</strong></p>
+            <p><strong> Filtros de búsqueda avanzados</strong></p>
             <div class="mb-4 border-bottom pb-4">
                 <div class="mb-3">
                     <h4 class="fs-5 fw-semibold mb-2">Categorias</h4>

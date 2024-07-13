@@ -100,10 +100,10 @@
                         <div class="form-check form-check-bookmark mb-2 mb-sm-0">
                             <input class="form-check-input" type="checkbox" value="" id="jobBookmarkCheck">
                             <label class="form-check-label" for="jobBookmarkCheck">
-                                <span class="form-check-bookmark-default">
+                                <span class="form-check-bookmark-default" (click)="showAdd()">
                                     <i class="fa-regular fa-heart me-1"></i> Agregar a favoritos
                                 </span>
-                                <span class="form-check-bookmark-active">
+                                <span class="form-check-bookmark-active" (click)="showRemove()">
                                     <i class="fa-solid fa-heart me-1"></i> Guardado
                                 </span>
                             </label>

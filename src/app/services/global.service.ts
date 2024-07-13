@@ -16,6 +16,61 @@ import { virtualRouter } from './virtualRouter.service';
 import { environment } from '../../environments/environment';
 import PocketBase from 'pocketbase';
 // import { Apollo, gql } from 'apollo-angular';
+// interface Specialist {
+//   id: string;
+//   full_name: string;
+//   specialties: { id: string; name: string }[];
+//   // otros campos que se encuentran en la data...
+// }
+interface Specialty {
+  id: string;
+  name: string;
+  fatherId:string;
+}
+interface Category {
+  id: string;
+}
+
+interface Specialist {
+    id: string;
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    updated: string;
+    address: string;
+    advertisePlatform: boolean;
+    advertiseProfile: boolean;
+    advertiseServices: string[];
+    availability: string;
+    certificates: string[];
+    city: string;
+    consultationAddress: string;
+    country: string;
+    days: string[];
+    email: string;
+    friday: boolean;
+    full_name: string;
+    gender: string;
+    graduationYear: string;
+    membership: string;
+    membershipPlan: string;
+    monday: boolean;
+    phone: string;
+    profession: string;
+    saturday: boolean;
+    schedule: string;
+    services: string;
+    studyArea: string;
+    sunday: boolean;
+    thursday: boolean;
+    tuesday: boolean;
+    university: string;
+    wednesday: boolean;
+    documents: string[];
+    status: 'pending' | 'active' | 'approved'; 
+    images: string[];
+    specialties: Specialty[];
+}
 interface ApiResponse {
   page: number;
   perPage: number;  
@@ -74,13 +129,16 @@ viewSelected="list";
   newUploaderAvatar: boolean = false;
   specialistRegisterStep: number = 1;
   selectedTicketsCount = 0;
-  idCategorySelected = '';
+  // idCategorySelected = '';
   products: any[] = [];
   doctors: any[] = [];
   specialties: any[] = [];
   specialtiesFiltered: any[] = [];
   categorySelected: any = false;
-  specialists: any[] = [];
+  categoryFilterSelected: any = false;
+
+  categoryFiltered: any[] = [];
+  // specialists: any[] = [];
   travelers: any[] = [];
   specialistsUnlimited: any[] = [];
   car: any[] = [];
@@ -164,8 +222,14 @@ viewSelected="list";
     },
     ticketNumbers: {},
   };
+  filteredSpecialists: Specialist[] = [];
+  filteredSpecialties: Specialty[] = [];
 
   specialtySelected: string = '';
+
+
+  specialists: Specialist[] = [];
+    idCategorySelected: string | null = null;
   filtered = false;
   mySelection: { [key: number]: boolean } = {};
   assetments: any[] = [];
@@ -265,8 +329,36 @@ viewSelected="list";
     // );
  
   }
+  setCategory(category: { id: string }) {
+    this.idCategorySelected = category.id;
+    this.filterSpecialistsByCategory();
+    this.filterSpecialtiesByCategory();
+    this.categoryFilterSelected=true;
+}
+
+filterSpecialistsByCategory() {
+  if (this.idCategorySelected) {
+      this.filteredSpecialists = this.specialists.filter(specialist => 
+          specialist.specialties.some(specialty => specialty.id === this.idCategorySelected)
+      );
+  } else {
+      this.filteredSpecialists = this.specialists;
+  }
+}
+filterSpecialtiesByCategory() {
+  if (this.idCategorySelected) {
+    this.specialtiesFiltered = this.specialties.filter(specialty =>
+      specialty.fatherId === this.idCategorySelected
+    );
+  } else {
+    this.specialtiesFiltered = this.specialties;
+  }
+}
 
 
+getFilteredSpecialists(): Specialist[] {
+    return this.filteredSpecialists;
+}
 
   unapproveSpecialist(id: string): Observable<any> {
     const data = { status: 'pending' };
