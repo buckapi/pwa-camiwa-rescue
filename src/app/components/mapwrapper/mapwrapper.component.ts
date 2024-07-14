@@ -11,9 +11,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './mapwrapper.component.css'
 })
 export class MapwrapperComponent {
+  hoverColor: string = ''; // Declaración e inicialización de la propiedad hoverColor
+
+  hoverStates: boolean[] = [];
 constructor(
   public global: GlobalService,
-){}
+){ this.hoverStates = new Array(this.global.categories.length).fill(false);
+}
+setHoverState(index: number, isHovering: boolean) {
+  this.hoverStates[index] = isHovering;
+}
 viewDetail(specialist:any){
   this.global.previewRequest=specialist;
   this.global.setRoute('specialistdetail')

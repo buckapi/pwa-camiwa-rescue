@@ -22,13 +22,22 @@
                     <h4 class="fs-5 fw-semibold mb-2">Categorias</h4>
                 </div>
                 <!-- Start Form Check -->
-                <div class="form-check mb-2" *ngFor="let category of global.categories; let i = index"
-                    [hidden]="category.status!='active'">
-                    <!-- <input class="form-check-input" type="checkbox" value="" id="{{i}}"> -->
-                    <label class="form-check-label" for="{{i}}" (click)="global.setCategory(category)"  [ngStyle]="{'color': category.id === global.idCategorySelected ? '#00a08f' : ''}">{{category.name}}<span
-                            class="count fs-13 ms-1 text-muted">( {{global.categoryCounts[category.id]}}
-                            )</span></label>
+                <div class="form-check mb-2" *ngFor="let category of global.categories; let i = index" [hidden]="category.status !== 'active'">
+                    <!-- <input class="form-check-input" type="checkbox" [value]="category.id" id="category-{{ i }}"> -->
+                    <label class="form-check-label" for="category-{{ i }}"
+                           (click)="global.setCategory(category)"
+                           [ngStyle]="{'color': category.id === global.idCategorySelected ? '#00a08f' : ''}"
+                           class="hover-effect">
+                        {{ category.name }}
+                        <span class="count fs-13 ms-1 text-muted">( {{ global.categoryCounts[category.id] }} )</span>
+                    </label>
                 </div>
+                <!-- <div class="form-check mb-2" *ngFor="let category of global.categories; let i = index"
+                [hidden]="category.status!='active'">
+                <label class="form-check-label" for="{{i}}" (click)="global.setCategory(category)"  [ngStyle]="{'color': category.id === global.idCategorySelected ? '#00a08f' : ''}">{{category.name}}
+                    <span    class="count fs-13 ms-1 text-muted">( {{global.categoryCounts[category.id]}})</span>
+                </label>
+            </div> -->
                 <!-- End Form Check -->
 
 
@@ -68,10 +77,10 @@
 
                                     <div class="">
                                         <a
-                                            class="border-0 card card-hover d-block header-cat-box px-3 py-4 rounded-4 shadow text-center" style="margin-right: 5px;">
-                                            <img src="assets/camiwa/images/icon/handyperson.png" alt="" height="40">
+                                            class="border-0 card card-hover d-block header-cat-box px-3 py-4 rounded-4 shadow text-center" style="margin-left: 5px;">
+                                            <img src="assets/camiwa/images/icon/specialist.png" alt="" height="70">
                                             <div
-                                            class="align-items-center badge bg-light font-caveat fs-6 fw-semibold justify-content-center mt-2 py-1 rounded-4 text-primary">
+                                            class="align-items-center badge bg-light font-caveat fs-6 fw-semibold justify-content-center mt-2 py-1 rounded-4 text-primary" style="margin-left: 10px;  border: 1px solid #00a08f;">
                                             56</div>
                                             <div class="fw-semibold mt-4">{{especialty.name}}</div>
                                            
@@ -88,9 +97,9 @@
                                     <div class="">
                                         <a
                                             class="border-0 card card-hover d-block header-cat-box px-3 py-4 rounded-4 shadow text-center">
-                                            <img src="assets/camiwa/images/icon/handyperson.png" alt="" height="40">
+                                            <img src="assets/camiwa/images/icon/specialist.png" alt="" height="70">
                                             <div
-                                                class="align-items-center badge bg-light font-caveat fs-6 fw-semibold justify-content-center mt-2 py-1 rounded-4 text-primary">
+                                                class="align-items-center badge bg-light font-caveat fs-6 fw-semibold  justify-content-center mt-2 py-1 rounded-4 text-primary"style="margin-left: 10px;     border: 1px solid #00a08f;">
                                                 56</div>
                                             <div class="fw-semibold mt-4">{{especialty.name}}</div>
                                             
@@ -141,7 +150,7 @@
                     <!-- end /. card link -->
                     <!-- start card image wrap -->
                     <div class="card-img-wrap card-image-hover overflow-hidden dark-overlay">
-                        <div class="bg-info card-badge d-inline-block text-white position-absolute">Verificado</div>
+                        <!-- <div class="bg-info card-badge d-inline-block text-white position-absolute" style="font-size: 1rem !important; font-weight: bold;">Verificado</div> -->
                         <img src="{{specialist.images[0]}}" aclass="object-fluid" style="display: block;
                         max-width: 210px;
                         max-height: 210px;
@@ -151,7 +160,7 @@
                         <div class="d-flex end-0 gap-2 me-3 mt-3 position-absolute top-0 z-1">
                             <a href="allspeciality.html"
                                 class="btn-icon shadow-sm d-flex align-items-center justify-content-center text-primary bg-light rounded-circle"
-                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Quick View">
+                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ver detalles">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-search" viewBox="0 0 16 16">
                                     <path
@@ -176,24 +185,24 @@
                             <!-- end /. ratings counter text -->
                         </div>
                         <!-- start card title -->
-                        <h5>{{specialist.full_name}}</h5>
+                        <h5>{{specialist.full_name}}     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="bi bi-patch-check-fill text-info" viewBox="0 0 16 16">
+                            <path
+                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                        </svg></h5>
                         <h4 class="fs-18 fw-semibold mb-0">
-                            <span *ngFor="let specialty of specialist.specialties"> {{specialty.name}} <br /></span>
+                          
+                        
+                            <span *ngFor="let specialty of specialist.specialties"> {{specialty.name}}
+                                
+                            
+                                <br /></span>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                class="bi bi-patch-check-fill text-info" viewBox="0 0 16 16">
-                                <path
-                                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-                            </svg>
+                          
                         </h4>
                         <p class="mb-0 small">{{specialist.services}}</p>
                         <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#9b9b9b"
-                                class="bi bi-compass" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                                <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-                            </svg>
+                            
                             <span>Ubicación</span>
                         </a>
                         <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
@@ -202,7 +211,7 @@
                         <!-- end /. card title -->
                         <!-- start contact content -->
                         <div class="d-flex flex-wrap gap-3 mt-2 z-1">
-                            <a (click)="viewDetail(specialist)"
+                            <!-- <a (click)="viewDetail(specialist)"
                                 class="d-flex gap-2 align-items-center fs-13 fw-semibold">
                                 <button type="submit" class="btn btn-primary  w-100" style="color: #000;
                                 --bs-btn-bg: #fff;">Ver perfil</button>
@@ -211,6 +220,15 @@
                             <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
                                 <button type="submit" class="btn btn-primary  w-100">Pedir cita</button>
 
+                            </a> -->
+
+
+                            <a class="d-flex gap-2 align-items-center fs-13 fw-semibold" (click)="viewDetail(specialist)">
+                                <button type="submit" class="btn btn-perfil btn-lg w-100" style="
+                        --bs-btn-bg: #fff;">Ver perfil</button>
+                            </a>
+                            <a href="#" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                                <button type="submit" class="btn btn-agenda btn-lg w-100">Agendar</button>
                             </a>
                         </div>
 
@@ -258,17 +276,19 @@
                                     <!-- end /. rating counter text -->
                                 </div>
                                 <!-- start card title -->
-                                <h4>{{specialist.full_name}}</h4>
+                                <h4>{{specialist.full_name}}     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                    class="bi bi-patch-check-fill text-info" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z">
+                                    </path>
+                                </svg></h4>
                                 <h5 class="fs-18 fw-semibold mb-0">
-                                    <span *ngFor="let specialty of specialist.specialties"> {{specialty.name}}
+                                    
+                                    <span *ngFor="let specialty of specialist.specialties"> {{specialty.name}} 
+                                    
                                         <br /></span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                        class="bi bi-patch-check-fill text-info" viewBox="0 0 16 16">
-                                        <path
-                                            d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z">
-                                        </path>
-                                    </svg>
+                                   
                                 </h5>
                                 <p class="mb-0 small">{{specialist.services}}</p>
                                 <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
@@ -284,7 +304,7 @@
                                     <span>$</span> 200COP
                                 </a>
                                 <div class="d-flex flex-wrap gap-3 mt-2 z-1">
-                                    <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                                    <!-- <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
                                         <button type="submit" class="btn btn-primary  w-100" style="color: #000;
                                         --bs-btn-bg: #fff;">Ver perfil</button>
 
@@ -292,8 +312,16 @@
                                     <a class="d-flex gap-2 align-items-center fs-13 fw-semibold">
                                         <button type="submit" class="btn btn-primary  w-100">Consultar</button>
 
+                                    </a> -->
+                                    <a class="d-flex gap-2 align-items-center fs-13 fw-semibold" (click)="viewDetail(specialist)">
+                                        <button type="submit" class="btn btn-perfil btn-lg w-100" style="
+                                --bs-btn-bg: #fff;">Ver perfil</button>
+                                    </a>
+                                    <a href="#" class="d-flex gap-2 align-items-center fs-13 fw-semibold">
+                                        <button type="submit" class="btn btn-agenda btn-lg w-100">Agendar</button>
                                     </a>
                                 </div>
+                                
                                 <!-- end contact content -->
                             </div>
                         </div>

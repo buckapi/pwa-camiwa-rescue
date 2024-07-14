@@ -2,7 +2,7 @@
     <!-- start navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand m-0" href="index.html">
+            <a class="navbar-brand m-0" (click)="global.setRoute('home')">
                 <img class="logo-white" src="assets/camiwa/images/logo-white.png" alt="">
                 <img class="logo-dark" src="assets/camiwa/images/logo.png" alt="">
             </a>
@@ -16,7 +16,7 @@
                     <div class="vr d-none d-sm-inline-block"></div>
                     <span class="d-none d-sm-inline-block">Ingresar Viajero</span>
                 </a>
-                <a (click)="global.setRoute('specialist-register')" class="btn btn-primary d-none d-sm-flex fw-medium gap-2 hstack rounded-5" style="background-color: #ffff; color: #44b678;">
+                <a (click)="global.setRoute('specialist-register')" class="btn btn-primary d-none d-sm-flex fw-medium gap-2 hstack rounded-5" style="background-color: #ffff; color: #00a890;">
                     <i class="fa fa-user-plus"></i>
                     <div class="vr d-none d-sm-inline-block"></div>
                     <span class="d-none d-sm-inline-block">Ingresar Especialista</span>
@@ -114,9 +114,9 @@
             <div class="col-md-8 col-lg-5 col-xl-6" >
                 <div class="search-select-input has-icon has-icon-y position-relative">
                     <!-- input -->
-                    <input class="form-control" type="text" placeholder="Qué estás buscando?" style="background-color: white; ">
+                    <input class="form-control" type="text" placeholder="Qué estás buscando?" style="margin-left: 20px !important; background-color: #07efd717; ">
                     <!-- icon -->
-                    <svg class="form-icon-start position-absolute top-50 bi bi-pin-map-fill" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <svg class="form-icon-start position-absolute top-50 bi bi-pin-map-fill" style="margin-left: 20px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z" />
                         <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z" />
                     </svg>

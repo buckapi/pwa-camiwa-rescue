@@ -29,17 +29,17 @@ body {
 
 ::-moz-selection {
   color: #fff;
-  background-color: #44b678;
+  background-color: #00a890;
 }
 
 ::selection {
   color: #fff;
-  background-color: #44b678;
+  background-color: #00a890;
 }
 
 ::-moz-selection {
   color: #fff;
-  background-color: #44b678;
+  background-color: #00a890;
 }
 
 ul {
@@ -217,7 +217,7 @@ h6 {
   height: 55px;
   position: absolute;
   border-radius: 100%;
-  border: 2px solid #44b67800;
+  border: 2px solid #00a89000;
   z-index: 3;
 }
 .steps-area .steps li span {
@@ -247,7 +247,7 @@ h6 {
   content: "";
   width: 2px;
   height: 0;
-  background: #44b678;
+  background: #00a890;
   position: absolute;
   right: 18px;
   top: 40px;
@@ -259,7 +259,7 @@ h6 {
   display: none;
 }
 .steps-area .steps li.js-active span {
-  background: #44b678;
+  background: #00a890;
 }
 .steps-area .steps li.js-active span:after {
   height: 86px;
@@ -272,10 +272,10 @@ h6 {
   height: 55px;
   position: absolute;
   border-radius: 100%;
-  border: 2px solid #44b678;
+  border: 2px solid #00a890;
 }
 .steps-area .steps li.current span {
-  background: #44b678;
+  background: #00a890;
 }
 .steps-area .steps li.current span:after {
   height: 50px;
@@ -393,7 +393,7 @@ select.form-control option[value=""][disabled] {
   border-radius: 5px;
   line-height: 75px;
   text-align: center;
-  background-color: #44b678;
+  background-color: #00a890;
   border: 0;
   cursor: pointer;
   margin-left: 10px;
@@ -717,7 +717,7 @@ select.form-control option[value=""][disabled] {
   font-size: 27px;
 }
 .form-content .bottom-line {
-  border-bottom: 2px solid #44b678;
+  border-bottom: 2px solid #00a890;
 }
 .form-content h2 {
   font-size: 50px;
@@ -775,7 +775,7 @@ select.form-control option[value=""][disabled] {
   display: none;
   position: absolute;
   border-radius: 100%;
-  background-color: #44b678;
+  background-color: #00a890;
 }
 
 .step-box-content.active .service-check-option span:after {
@@ -800,7 +800,7 @@ select.form-control option[value=""][disabled] {
   border-radius: 10px;
 }
 .step-progress .progress .progress-bar {
-  background-color: #44b678;
+  background-color: #00a890;
   width: 20%;
   border-radius: 10px;
 }
@@ -819,7 +819,7 @@ select.form-control option[value=""][disabled] {
 .form-inner-area input:focus {
   -webkit-box-shadow: 0px 5px 35px 0px rgba(107, 89, 211, 0.17);
           box-shadow: 0px 5px 35px 0px rgba(107, 89, 211, 0.17);
-  border: 2px solid #44b678;
+  border: 2px solid #00a890;
 }
 
 .gender-selection {
@@ -934,15 +934,15 @@ select.form-control option[value=""][disabled] {
   line-height: 1;
   font-weight: 900;
   display: none;
-  color: #44b678;
+  color: #00a890;
   font-family: "Font Awesome 5 Free";
   position: absolute;
 }
 .services-select-option li.active {
-  border: 2px solid #44b678;
+  border: 2px solid #00a890;
 }
 .services-select-option li.active:after {
-  border: 2px solid #44b678;
+  border: 2px solid #00a890;
 }
 .services-select-option li.active:before {
   display: block;
@@ -1042,18 +1042,18 @@ select.form-control option[value=""][disabled] {
   position: absolute;
 }
 .budget-area .opti-list li.active {
-  border: 2px solid #44b678;
+  border: 2px solid #00a890;
   box-shadow: 0 0 15px 5px #6b58d317;
 }
 .budget-area .opti-list li.active:after {
-  border: 2px solid #44b678;
-  background-color: #44b678;
+  border: 2px solid #00a890;
+  background-color: #00a890;
 }
 .budget-area .opti-list li.active:before {
   display: block;
 }
 .budget-area .opti-list li:hover {
-  border-color: #44b678;
+  border-color: #00a890;
   box-shadow: 0 0 15px 5px #6b58d317;
 }
 
@@ -1118,7 +1118,7 @@ select.form-control option[value=""][disabled] {
   top: 15px;
   left: 20px;
   display: none;
-  color: #44b678;
+  color: #00a890;
   font-size: 30px;
   font-weight: 900;
   content: "";
@@ -1133,7 +1133,7 @@ select.form-control option[value=""][disabled] {
 }
 .plan-icon-text .plan-icon i {
   font-size: 44px;
-  color: #44b678;
+  color: #00a890;
 }
 .plan-icon-text .plan-text h3 {
   font-size: 26px;

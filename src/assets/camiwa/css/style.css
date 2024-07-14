@@ -2815,7 +2815,9 @@ hr {
 
 @media(min-width: 1400px) {
     .sidebar-filters {
-        width: 350px;
+        /* width: 350px; */
+        width: 420px;
+
     }
 
     .items-content {

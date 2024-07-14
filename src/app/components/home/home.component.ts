@@ -29,6 +29,10 @@ constructor(
     this.global.setRoute("dashboard")
   }
 }
+viewDetail(specialist:any){
+  this.global.previewRequest=specialist;
+  this.global.setRoute('specialistdetail')
+}
 ngAfterViewInit() {
   new Swiper('.swiper-container', {
     slidesPerView: 1,

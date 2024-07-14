@@ -49,3 +49,23 @@
 .text-center {
     text-align: center;
 }
+.btn-perfil {
+    color: #00a08f;
+    background-color: transparent;
+    border-color: #00a08f; /* Color de fondo inicial */
+}
+
+.btn-perfil:hover {
+    color: white;
+    background-color: #00a08f; /* Color de fondo al pasar el mouse */
+}
+.btn-agenda:hover  {
+    background-color: transparent;
+    color: #00a08f;
+    border-color: #00a08f; /* Color de fondo inicial */
+}
+
+.btn-agenda{
+    color: white;
+    background-color: #00a08f; /* Color de fondo al pasar el mouse */
+}
