@@ -89,6 +89,8 @@
                                 </div>
                             </div>
                         </div>
+                        <app-placeholder *ngFor="let placeholder of placeholders" style="margin-right: 25px;" [hidden]="global.specialties.length>1"></app-placeholder>
+
                         <div class="swiper-container row g-2 g-sm-4" [hidden]="global.categoryFilterSelected">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide col-4 col-md-4 col-sm-4 col-xl-2 " style="cursor: pointer;"
