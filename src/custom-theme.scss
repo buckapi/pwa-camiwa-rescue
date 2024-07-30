@@ -35,3 +35,7 @@ $camiwa-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($camiwa-theme);
 
+::ng-deep .mat-calendar .mat-calendar-body-cell-selected {
+  background-color: yellow !important;
+  color: black !important; /* Asegúrate de que el texto sea legible */
+}

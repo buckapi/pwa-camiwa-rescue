@@ -99,7 +99,7 @@ export class TravLoginComponent {
               this.fetchClientData(id); // Pasar el ID del cliente al método
               break;
             default:
-              this.virtualRouter.routerActive = 'dashboard';
+              this.virtualRouter.routerActive = 'mapwrapper';
               break;
           }
           // Marcar al usuario como logueado en localStorage

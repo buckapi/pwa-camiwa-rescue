@@ -22,58 +22,68 @@ import PocketBase from 'pocketbase';
 //   specialties: { id: string; name: string }[];
 //   // otros campos que se encuentran en la data...
 // }
+class MyClass {
+  specialtyFilteredSelected: Specialty | null = null;
+  specialists: Specialist[] = [];
+  filteredSpecialists: Specialist[] = [];
+  specialtiesFilteredSelected = false;
+
+  // Tu constructor y otros métodos aquí...
+}
+
 interface Specialty {
-  id: string;
   name: string;
-  fatherId:string;
+  id: string;
+  fatherId: string;
 }
 interface Category {
   id: string;
 }
 
 interface Specialist {
-    id: string;
-    collectionId: string;
-    collectionName: string;
-    created: string;
-    updated: string;
-    address: string;
-    advertisePlatform: boolean;
-    advertiseProfile: boolean;
-    advertiseServices: string[];
-    availability: string;
-    certificates: string[];
-    city: string;
-    consultationAddress: string;
-    country: string;
-    days: string[];
-    email: string;
-    friday: boolean;
-    full_name: string;
-    gender: string;
-    graduationYear: string;
-    membership: string;
-    membershipPlan: string;
-    monday: boolean;
-    phone: string;
-    profession: string;
-    saturday: boolean;
-    schedule: string;
-    services: string;
-    studyArea: string;
-    sunday: boolean;
-    thursday: boolean;
-    tuesday: boolean;
-    university: string;
-    wednesday: boolean;
-    documents: string[];
-    status: 'pending' | 'active' | 'approved'; 
-    images: string[];
-    specialties: Specialty[];
+  id: string;
+
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  updated: string;
+  address: string;
+  advertisePlatform: boolean;
+  advertiseProfile: boolean;
+  advertiseServices: string[];
+  availability: string;
+  certificates: string[];
+  city: string;
+  consultationAddress: string;
+  country: string;
+  days: string[];
+  email: string;
+  friday: boolean;
+  full_name: string;
+  gender: string;
+  graduationYear: string;
+  membership: string;
+  membershipPlan: string;
+  monday: boolean;
+  phone: string;
+  profession: string;
+  saturday: boolean;
+  schedule: string;
+  services: string;
+  studyArea: string;
+  sunday: boolean;
+  thursday: boolean;
+  tuesday: boolean;
+  university: string;
+  wednesday: boolean;
+  documents: string[];
+  status: 'pending' | 'active' | 'approved';
+  images: string[];
+  specialties: Specialty[];
 }
 interface ApiResponse {
   page: number;
-  perPage: number;  
+  perPage: number;
   totalItems: number;
   totalPages: number;
   items: any[]; // Puedes ajustar el tipo de 'items' según su estructura real
@@ -99,10 +109,10 @@ export class GlobalService {
     'https://db.buckapi.com:8090/api/collections/camiwaCategories/records';
   private specialtiesUrl =
     'https://db.buckapi.com:8090/api/collections/camiwaSpecialties/records';
-    private travelersUrl =
+  private travelersUrl =
     'https://db.buckapi.com:8090/api/collections/camiwaTravelers/records';
- 
-    private specialistsUrl =
+
+  private specialistsUrl =
     'https://db.buckapi.com:8090/api/collections/camiwaSpecialists/records';
   private productsUrl =
     'https://db.buckapi.com:8090/api/collections/frutmeProducts/records';
@@ -114,26 +124,54 @@ export class GlobalService {
   private assetmentsUrl =
     'http://localhost8095/api/collections/assetments/records';
   aside = true;
-  allLoaded=false;
-  totalRequests=0;
-  modalType:string='';
-
+  allLoaded = false;
+  totalRequests = 0;
+  modalType: string = '';
+  specialtyId: string = ';';
   private pb = new PocketBase('https://db.buckapi.com:8090');
   uploaderImages: string[] = [];
   certificates: string[] = [];
   avatar: string[] = [];
+  totalCategoryCounts = 0;
   categoryCounts: { [key: string]: number } = {};
-viewSelected="list";
+  viewSelected = 'list';
   newImage: boolean = false;
+  dayNames = [
+    'Domingo',
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+  ];
+  daysMap = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+  ];
   newUploaderImage: boolean = false;
   newUploaderAvatar: boolean = false;
   specialistRegisterStep: number = 1;
   selectedTicketsCount = 0;
   // idCategorySelected = '';
   products: any[] = [];
+  workingDays: any[] = [];
+  showCalendar = true;
   doctors: any[] = [];
   specialties: any[] = [];
   specialtiesFiltered: any[] = [];
+  // specialtyFilteredSelected: any[] = [];
+  specialtyFilteredSelected: Specialty | null = null;
+
+  specialistsToShow: Specialist[] = [];
+  totalFilteredSpecialists: number = 0; // Total de especialistas filtrados
+
+  specialtiesFilteredSelected = false;
   categorySelected: any = false;
   categoryFilterSelected: any = false;
 
@@ -155,16 +193,17 @@ viewSelected="list";
     description: [],
   };
   previewRequest: {
-    id:string;
-    monday:boolean;
-    tuesday:boolean,
-    wednesday:boolean,
-    thursday:boolean,
-    saturday:boolean,
-    friday:boolean,
+    id: string;
+    monday: boolean;
+    tuesday: boolean;
+    wednesday: boolean;
+    thursday: boolean;
+    saturday: boolean;
+    friday: boolean;
     full_name: string;
     address: string;
     city: string;
+    days: string[];
     country: string;
     email: string;
     phone: string;
@@ -176,15 +215,14 @@ viewSelected="list";
     certificates: string[];
     documents: string[];
     images: string[];
-
-} = {
-  id:'',
-  monday:false,
-  tuesday:false,
-  wednesday:false,
-  thursday:false,
-  saturday:false,
-  friday:false,
+  } = {
+    id: '',
+    monday: false,
+    tuesday: false,
+    wednesday: false,
+    thursday: false,
+    saturday: false,
+    friday: false,
     full_name: '',
     address: '',
     city: '',
@@ -198,8 +236,10 @@ viewSelected="list";
     specialties: [],
     certificates: [],
     documents: [],
+    days: [],
+
     images: [],
-};
+  };
   previewCard: {
     ticketNumber: string;
     image: string;
@@ -226,16 +266,13 @@ viewSelected="list";
   filteredSpecialties: Specialty[] = [];
 
   specialtySelected: string = '';
-
-
   specialists: Specialist[] = [];
-    idCategorySelected: string | null = null;
+  idCategorySelected: string | null = null;
   filtered = false;
   mySelection: { [key: number]: boolean } = {};
   assetments: any[] = [];
   info: any[] = [];
   categories: any[] = [];
-
   tours: any[] = [];
   currentPage: number = 1;
   totalProducts: number = 0; // Total de productos que tu API puede devolver
@@ -264,47 +301,54 @@ viewSelected="list";
     //   public authRESTService: AuthRESTService,
     //   public butler: Butler,
     public http: HttpClient,
-    public virtuallRouter: virtualRouter
-  ) //   public yeoman: Yeoman,
-  //   public dataApiService: DataApiService
-  
-
+    public virtuallRouter: virtualRouter //   public yeoman: Yeoman,
+  ) //   public dataApiService: DataApiService
   {
+    this.specialistsToShow = this.specialists;
     this.initializeRealtime();
-    
     this.getCategories().subscribe((response) => {
       this.categories = response.items;
       console.log('Categorías:', JSON.stringify(this.categories));
-
       // Inicializar el contador para cada categoría
-      this.categories.forEach(category => {
+      this.categoryCounts = {};
+      this.categories.forEach((category) => {
         this.categoryCounts[category.id] = 0;
       });
-
       this.getSpecialties().subscribe((response) => {
         this.specialties = response;
         console.log('Especialidades:', JSON.stringify(this.specialties));
-
         // Contar las especialidades para cada categoría
-        this.specialties.forEach(specialty => {
+        this.specialties.forEach((specialty) => {
           if (this.categoryCounts[specialty.fatherId] !== undefined) {
             this.categoryCounts[specialty.fatherId]++;
           }
         });
 
         // Mostrar los contadores por consola
-        console.log('Contadores de especialidades por categoría:', JSON.stringify(this.categoryCounts));
+        console.log(
+          'Contadores de especialidades por categoría:',
+          JSON.stringify(this.categoryCounts)
+        );
+
+        // Calcular el total de categoryCounts
+        this.totalCategoryCounts = Object.values(this.categoryCounts).reduce(
+          (sum, count) => sum + count,
+          0
+        );
+        console.log('Total de categoryCounts:', this.totalCategoryCounts);
       });
     });
+
     this.getSpecialists().subscribe((response) => {
       this.specialists = response.items;
-      this.specialistsUnlimited=[];
-      let size =this.specialists.length;
+      this.specialistsUnlimited = [];
+      let size = this.specialists.length;
 
-      for (let i = 0; i < size; i++) {  // Corrección aquí: 'i < size'
-        console.log("membership " + this.specialists[i].membership);
+      for (let i = 0; i < size; i++) {
+        // Corrección aquí: 'i < size'
+        console.log('membership ' + this.specialists[i].membership);
 
-        if (this.specialists[i].membership === "Unlimited Plan") {
+        if (this.specialists[i].membership === 'Unlimited Plan') {
           this.specialistsUnlimited.push(this.specialists[i]);
         }
       }
@@ -312,12 +356,11 @@ viewSelected="list";
     });
     this.getTravelers().subscribe((response) => {
       this.travelers = response.items;
-      let size =this.travelers.length;
+      let size = this.travelers.length;
 
-      for (let i = 0; i < size; i++) {  // Corrección aquí: 'i < size'
-        console.log("membership " + this.travelers[i].membership);
-
-     
+      for (let i = 0; i < size; i++) {
+        // Corrección aquí: 'i < size'
+        console.log('membership ' + this.travelers[i].membership);
       }
       console.log('travelers' + JSON.stringify(this.travelers));
     });
@@ -327,44 +370,188 @@ viewSelected="list";
     //     this.doctors=response;
     //   }
     // );
- 
   }
   setCategory(category: { id: string }) {
-    this.idCategorySelected = category.id;
+    // Si la categoría clickeada es la misma que la actualmente seleccionada, deselecciona
+    if (this.idCategorySelected === category.id) {
+      this.categoryFilterSelected = false;
+      this.idCategorySelected = '';
+    } else {
+      // Selecciona la nueva categoría
+      this.categoryFilterSelected = true;
+      this.idCategorySelected = category.id;
+    }
+    // Filtra especialistas y especialidades basados en la categoría seleccionada
     this.filterSpecialistsByCategory();
     this.filterSpecialtiesByCategory();
-    this.categoryFilterSelected=true;
-}
+  }
 
-filterSpecialistsByCategory() {
-  if (this.idCategorySelected) {
-      this.filteredSpecialists = this.specialists.filter(specialist => 
-          specialist.specialties.some(specialty => specialty.id === this.idCategorySelected)
+  filterSpecialistsByCategory() {
+    if (this.idCategorySelected) {
+      // Crear un mapa de id de especialidad a fatherId para un acceso rápido
+      const specialtyToFatherIdMap = this.specialties.reduce(
+        (map, specialty) => {
+          map[specialty.id] = specialty.fatherId;
+          return map;
+        },
+        {}
       );
-  } else {
+
+      this.specialistsToShow = this.specialists.filter((specialist) =>
+        specialist.specialties.some(
+          (specialty) =>
+            specialtyToFatherIdMap[specialty.id] === this.idCategorySelected
+        )
+      );
+      this.specialtiesFilteredSelected = false;
+    } else {
+      this.specialtiesFilteredSelected = false;
+
+      this.specialistsToShow = this.specialists;
+    }
+  }
+
+  viewCalendar() {
+    this,this.viewDetail(this.previewRequest);
+    this.showCalendar = true;
+  }
+
+  viewDetail(specialist: any) {
+    // Mapeo de los índices a los nombres de los días de la semana
+    const daysMap = [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+    ];
+
+    // Transforma el array de booleanos en un array de nombres de días
+    const workingDays = specialist.days
+      .map((isWorking: boolean, index: number) =>
+        isWorking ? daysMap[index] : null
+      ) // Mapea a los días si es true
+      .filter((day: string | null): day is string => day !== null); // Filtra los nulls y asegura que day es string
+
+    // Asigna el resultado a this.global.workingDays
+    this.workingDays = workingDays;
+    console.log(JSON.stringify(this.workingDays));
+
+    // Actualiza la vista de detalle y la ruta
+    this.previewRequest = specialist;
+    this.setRoute('specialistdetail');
+  }
+
+  filterSpecialtiesByCategory() {
+    if (this.idCategorySelected) {
+      this.specialtiesFiltered = this.specialties.filter(
+        (specialty) => specialty.fatherId === this.idCategorySelected
+      );
+    } else {
+      this.specialtiesFiltered = this.specialties;
+    }
+  }
+
+  // selectSpecialty(specialty:Specialty){
+  // this.specialtiesFilteredSelected=true;
+  // this.specialtyFilteredSelected=specialty;
+  // }
+
+  selectSpecialty(specialty: Specialty) {
+    if (this.specialtyId === specialty.id) {
+      this.specialtyId = '';
+      this.specialtyFilteredSelected = null;
+      this.specialtiesFilteredSelected = false;
+      this.filteredSpecialists = this.specialists; // Restablece la lista
+      this.totalFilteredSpecialists = this.filteredSpecialists.length; // Actualiza el total
+    } else {
+      this.specialtyId = specialty.id;
+      this.specialtyFilteredSelected = specialty;
+      this.specialtiesFilteredSelected = true;
+      this.filterSpecialistsBySpecialty(specialty.id); // Aplica el filtrado
+    }
+    this.updateSpecialistsToShow();
+  }
+  onSpecialtyChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const selectedId = target.value;
+    console.log('Hola ' + selectedId);
+    if (selectedId === '') {
+      // Si se selecciona "Todas las especialidades", restablece el filtro
+      this.specialtyId = '';
+      this.specialtyFilteredSelected = null;
+      this.specialtiesFilteredSelected = false;
       this.filteredSpecialists = this.specialists;
+      this.totalFilteredSpecialists = this.filteredSpecialists.length;
+    } else {
+      // Encuentra la especialidad seleccionada
+      const selectedSpecialty = this.specialtiesFiltered.find(
+        (sp) => sp.id === selectedId
+      );
+      if (selectedSpecialty) {
+        this.selectSpecialty(selectedSpecialty);
+      }
+    }
   }
-}
-filterSpecialtiesByCategory() {
-  if (this.idCategorySelected) {
-    this.specialtiesFiltered = this.specialties.filter(specialty =>
-      specialty.fatherId === this.idCategorySelected
+  onSearchChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const searchTerm = target.value.toLowerCase();
+    this.filterSpecialists(searchTerm);
+  }
+  filterSpecialists(searchTerm: string) {
+    this.filteredSpecialists = this.specialists.filter((specialist) => {
+      const matchesFullName = specialist.full_name
+        .toLowerCase()
+        .includes(searchTerm);
+      const matchesServices = specialist.services
+        .toLowerCase()
+        .includes(searchTerm);
+      const matchesProfession = specialist.profession
+        .toLowerCase()
+        .includes(searchTerm);
+      const matchesSpecialties = specialist.specialties.some((specialty: any) =>
+        specialty.name.toLowerCase().includes(searchTerm)
+      );
+      return (
+        matchesFullName ||
+        matchesServices ||
+        matchesProfession ||
+        matchesSpecialties
+      );
+    });
+    this.totalFilteredSpecialists = this.filteredSpecialists.length;
+    this.specialistsToShow = this.filteredSpecialists;
+  }
+  updateSpecialistsToShow() {
+    if (this.specialtiesFilteredSelected) {
+      // Filtra especialistas por especialidad
+      this.specialistsToShow = this.filteredSpecialists;
+    } else {
+      // Muestra todos los especialistas
+      this.specialistsToShow = this.specialists;
+    }
+  }
+
+  filterSpecialistsBySpecialty(specialtyId: string) {
+    this.filteredSpecialists = this.specialists.filter((specialist) =>
+      specialist.specialties.some((specialty) => specialty.id === specialtyId)
     );
-  } else {
-    this.specialtiesFiltered = this.specialties;
+
+    // Actualiza el total de especialistas encontrados
+    this.totalFilteredSpecialists = this.filteredSpecialists.length;
   }
-}
 
-
-getFilteredSpecialists(): Specialist[] {
+  getFilteredSpecialists(): Specialist[] {
     return this.filteredSpecialists;
-}
+  }
 
   unapproveSpecialist(id: string): Observable<any> {
     const data = { status: 'pending' };
 
     return this.http.patch<any>(`${this.specialistsUrl}/${id}`, data);
-  }   
+  }
   approveSpecialist(id: string): Observable<any> {
     const data = { status: 'approved' };
     return this.http.patch<any>(`${this.specialistsUrl}/${id}`, data);
@@ -381,24 +568,27 @@ getFilteredSpecialists(): Specialist[] {
   public updateSpecialistsList() {
     this.getSpecialists().subscribe((response) => {
       this.specialists = response.items;
-      this.approvedSpecialistsCount=this.countApprovedSpecialists();
+      this.updateSpecialistsToShow();
+      this.approvedSpecialistsCount = this.countApprovedSpecialists();
       this.specialistsUnlimited = [];
       this.totalRequests = 0;
 
       let size = this.specialists.length;
       for (let i = 0; i < size; i++) {
-        if (this.specialists[i].membership === "Unlimited Plan") {
+        if (this.specialists[i].membership === 'Unlimited Plan') {
           this.specialistsUnlimited.push(this.specialists[i]);
         }
 
-        if (this.specialists[i].status === "pending") {
+        if (this.specialists[i].status === 'pending') {
           this.totalRequests++;
         }
       }
     });
   }
   countApprovedSpecialists(): number {
-    return this.specialists.filter(specialist => specialist.status === 'approved').length;
+    return this.specialists.filter(
+      (specialist) => specialist.status === 'approved'
+    ).length;
   }
   public handleRealtimeUpdate(event: any) {
     const record = event.record;
@@ -408,22 +598,24 @@ getFilteredSpecialists(): Specialist[] {
         this.specialists.push(record);
         break;
       case 'update':
-        const index = this.specialists.findIndex(s => s.id === record.id);
+        const index = this.specialists.findIndex((s) => s.id === record.id);
         if (index !== -1) {
           this.specialists[index] = record;
         }
         break;
       case 'delete':
-        this.specialists = this.specialists.filter(s => s.id !== record.id);
+        this.specialists = this.specialists.filter((s) => s.id !== record.id);
         break;
     }
     this.updateTotalRequests();
   }
   private updateTotalRequests() {
-    this.totalRequests = this.specialists.filter(s => s.status === 'pending').length;
+    this.totalRequests = this.specialists.filter(
+      (s) => s.status === 'pending'
+    ).length;
   }
-  setView(view:string){
-this.viewSelected=view;
+  setView(view: string) {
+    this.viewSelected = view;
   }
   setPreview(id: any, index: any) {
     this.idCategorySelected = id;
@@ -464,7 +656,6 @@ this.viewSelected=view;
       })
     );
   }
-
 
   setStep(step: number) {
     this.specialistRegisterStep = step;

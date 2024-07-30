@@ -188,6 +188,10 @@
                                 <p>¿Qué días atenderá?</p>
                                 <ul class="d-flex">
                                   <li >
+                                    <input type="checkbox" name="sunday" [(ngModel)]="formData.days[6]" (change)="onCheckboxChange(6, $event)">
+                                    DO
+                                  </li>
+                                  <li >
                                     <input type="checkbox"  [checked]="formData.days[0]" name="monday" [(ngModel)]="formData.days[0]" (click)="onCheckboxChange(0, $event)">
                                     LU
                                   </li>
@@ -211,10 +215,7 @@
                                     <input type="checkbox" name="saturday" [(ngModel)]="formData.days[5]" (click)="onCheckboxChange(5, $event)">
                                     SA
                                   </li>
-                                  <li >
-                                    <input type="checkbox" name="sunday" [(ngModel)]="formData.days[6]" (change)="onCheckboxChange(6, $event)">
-                                    DO
-                                  </li>
+                                  
                                 </ul>
                               </div>
                               

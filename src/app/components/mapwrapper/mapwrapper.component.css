@@ -31,3 +31,8 @@
     padding-left: 12px; /* Padding más fino */
     transition: all 0.3s ease; /* Transición suave */
 }
+.selected-specialty {
+    box-shadow: rgb(84 197 181 / 31%) -7px 6px 20px 0px !important;
+    transform: scale(1.02) !important;
+  }
+  

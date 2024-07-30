@@ -208,3 +208,7 @@ $disable-background-color: #eceeef;
     box-shadow: 0 0 0 2px $base-color;
   }
 }
+::ng-deep .mat-calendar .mat-calendar-body-cell-selected {
+  background-color: yellow !important;
+  color: black !important; /* Asegúrate de que el texto sea legible */
+}

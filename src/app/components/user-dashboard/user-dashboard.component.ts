@@ -9,7 +9,7 @@ import { PlaceholderComponent } from '../placeholder/placeholder.component';
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule,FilterbarComponent,PlaceholderComponent],
+  imports: [CommonModule,FilterbarComponent,PlaceholderComponent,PlaceholderComponent],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })

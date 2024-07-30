@@ -1,3 +1,4 @@
+
 @import url("@assets/camiwa/css/style.css");
 .back-button {
     display: flex;
@@ -43,4 +44,36 @@
 
 ::ng-deep .mat-calendar-body-cell.non-working-day .mat-calendar-body-cell-content {
     background-color: rgba(255, 97, 86, 0.151); /* Ejemplo de color */
+}
+.icon-hover:hover {
+  color: green;
+}
+
+.btn-perfil {
+  color: #00a08f;
+  background-color: transparent;
+  border: 2px solid #00a08f;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.btn-perfil:hover {
+  color: white;
+  background-color: #00a08f;
+}
+
+
+/* Estilo para el fondo amarillo de la fecha seleccionada */
+.mat-calendar-body-selected {
+  background-color: yellow !important;
+  color: black !important; /* Cambia el color del texto si es necesario */
+}
+
+.mat-calendar-body-selected.mat-calendar-body-today {
+  background-color: yellow !important;
 }

@@ -114,7 +114,7 @@
             <div class="col-md-8 col-lg-5 col-xl-6" [hidden]="" >
                 <div class="search-select-input has-icon has-icon-y position-relative">
                     <!-- input -->
-                    <input class="form-control" type="text" placeholder="Qué estás buscando?" style="margin-left: 20px !important; background-color: #07efd717; ">
+                    <input class="form-control" type="text"  (input)="global.onSearchChange($event)"placeholder="Qué estás buscando?" style="margin-left: 20px !important; background-color: #07efd717; ">
                     <!-- icon -->
                     <svg class="form-icon-start position-absolute top-50 bi bi-pin-map-fill" style="margin-left: 20px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z" />
@@ -133,12 +133,13 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-3 d-none d-lg-block">
+            <div class="col-md-2 col-lg-2 col-xl-3 d-none d-lg-block" >
                 <!-- Start Search Select -->
                 <div class="search-select has-icon position-relative" style="background-color: white !important;">
                     <select class="select2 form-select" aria-label="Default select example" style="background-color: white !important;">
                         <option selected style="background-color: white !important;">Seleccione ubicación</option>
-                        <option value="1"> Colombia</option>
+                        <option value="1"> Bogotá</option>
+                        <option value="1"> Medellín</option>
                         <!-- <option value="2">Web & Mobile Dev</option>
                         <option value="3">Writing</option>
                         <option value="4">Sales & Marketing</option>
@@ -152,11 +153,14 @@
                 <!-- /.End Search Select -->
             </div>
             <div class="col-md-2 col-lg-2 col-xl-3 d-none d-lg-block">
-                <div class="search-select has-icon position-relative" >
-                      <select class="select2 form-select" aria-label="Default select example" >
-                        <option selected [hidden]="global.categoryFilterSelected">Todas las especialidades</option>
-                        <option value="1" *ngFor="let sppecialty of global.specialtiesFiltered">{{sppecialty.name}}</option>
-                    </select>
+                <div class="search-select has-icon position-relative"  [hidden]="!global.categoryFilterSelected">
+                    <select class="select2 form-select" aria-label="Default select example" (change)="global.onSpecialtyChange($event)">
+                        <option value="" [hidden]="global.categoryFilterSelected">Todas las especialidades</option>
+                        <option *ngFor="let specialty of global.specialtiesFiltered" [value]="specialty.id" >
+                            
+                            <span (click)="global.selectSpecialty(specialty)">{{specialty.name}}</span>
+                            </option>
+                      </select>
                     <svg class="form-icon-start position-absolute top-50 search-icon z-1 bi bi-app-indicator" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z" />
                         <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
