@@ -106,16 +106,16 @@ export class GlobalService {
   // pagesArray: number[] = [];
   public urlPrev = '';
   private categoriesUrl =
-    'https://db.buckapi.com:8090/api/collections/camiwaCategories/records';
+    'https://db.buckapi.lat:4545/api/collections/camiwaCategories/records';
   private specialtiesUrl =
-    'https://db.buckapi.com:8090/api/collections/camiwaSpecialties/records';
+    'https://db.buckapi.lat:4545/api/collections/camiwaSpecialties/records';
   private travelersUrl =
-    'https://db.buckapi.com:8090/api/collections/camiwaTravelers/records';
+    'https://db.buckapi.lat:4545/api/collections/camiwaTravelers/records';
 
   private specialistsUrl =
-    'https://db.buckapi.com:8090/api/collections/camiwaSpecialists/records';
+    'https://db.buckapi.lat:4545/api/collections/camiwaSpecialists/records';
   private productsUrl =
-    'https://db.buckapi.com:8090/api/collections/frutmeProducts/records';
+    'https://db.buckapi.lat:4545/api/collections/frutmeProducts/records';
   private doctorsUrl = environment.apiUrl + '/api/collections/doctors/records';
 
   private toursUrl = 'http://localhost8070/api/collections/tours/records';
@@ -128,7 +128,7 @@ export class GlobalService {
   totalRequests = 0;
   modalType: string = '';
   specialtyId: string = ';';
-  private pb = new PocketBase('https://db.buckapi.com:8090');
+  private pb = new PocketBase('https://db.buckapi.lat:4545');
   uploaderImages: string[] = [];
   certificates: string[] = [];
   avatar: string[] = [];

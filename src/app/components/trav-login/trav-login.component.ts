@@ -113,7 +113,7 @@ export class TravLoginComponent {
 
   fetchClientData(userId: string): void {
     // Crear una instancia de PocketBase
-    const pb = new PocketBase('https://db.buckapi.com:8090');
+    const pb = new PocketBase('https://db.buckapi.lat:4545');
 
     // Hacer la solicitud para obtener los datos del cliente
     pb.collection('camiwaTravelers')

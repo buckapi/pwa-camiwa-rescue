@@ -263,7 +263,7 @@ formData: FormData = {
 
 
   onSubmit() {
-    const url = 'https://db.buckapi.com:8090/api/collections/camiwaSpecialists/records';
+    const url = 'https://db.buckapi.lat:4545/api/collections/camiwaSpecialists/records';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.formData.documents=this.global.uploaderImages;
     this.formData.certificates=this.global.certificates;
